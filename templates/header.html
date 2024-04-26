@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<div class="main"><div>
+    <div class="navbar">
+        <div class="icon">
+            <img src="{{ url_for('static', filename='images/clavier.png') }}" alt="Hero Image" class="logoimg">
+
+            <h2 class="logo">TYPIFAST</h2>
+        </div>
+
+        <div class="menu">
+            <ul>
+                <li class="fas fa-home" style="color:#AEBDCA"><a href="{{ url_for('accueil') }}">&nbsp;ACCUEIL</a></li>
+                <li class="fas fa-flask" style="color:#AEBDCA"><a href="{{ url_for('test_vitesse_clavier') }}">&nbsp;TEST</a></li>
+                <li class="fas fa-book" style="color:#AEBDCA"><a href="#">&nbsp;COURS</a></li>
+                <li class="fas fa-address-book" style="color:#AEBDCA"><a href="#">&nbsp;CONTACT</a></li>
+            </ul>
+        </div>
+        

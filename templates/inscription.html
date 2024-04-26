@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>TYPI FAST - Inscription</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+{% include 'header.html' %}
+
+<body>
+
+    <div class="main"> 
+        <img src="{{ url_for('static', filename='images/login.jpeg') }}" alt="login Image" style="	opacity:calc(1/ (28/12)); width:100%;height:98%;">
+    
+            </div> 
+        
+        <div class="formin">
+            <div class="container">
+
+                <label for="uname"><b>  <i class="fas fa-user"></i>&nbsp;&nbsp;Nom</b></label>
+                <div class="input-icon">
+                    <input type="text" placeholder="Entrez votre nom " name="uname" required>
+                </div>
+                <label for="Prénom"><b>  <i class="fas fa-user"></i>&nbsp;&nbsp;Prénom</b></label>
+                <div class="input-icon">
+                    <input type="text" placeholder="Entrez votre Prénom " name="Prénom" required>
+                </div>
+                <label for="uname"><b>  <i class="fas fa-envelope"></i>&nbsp;&nbsp;Email</b></label>
+                <div class="input-icon">
+                    <input type="text" placeholder="Entrez votre E-mail " name="uname" required>
+                </div>
+                <label for="uname"><b>  <i class="fas fa-lock"></i>&nbsp;&nbsp;Password</b></label>
+                <div class="input-icon">
+                    <input type="text" placeholder="Entrez Mot de passe " name="uname" required>
+                </div>
+
+            <button type="submit"><a href="#">S'inscrire</a></button>
+            <p class="link">Vous avez déjà un compte ?<br>
+            <a href="{{ url_for('connexion') }}">Connectez-vous ici</a></p>
+        </div>
+    </div>
+</div>
+    {% include 'footer.html'   %}
+        </div>
+        
+</body>
+</html>

@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <title>TYPI FAST</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+
+
+
+    {% include 'header.html' %}
+   
+</head>
+<body>
+  <div class="main">
+    <img src="{{ url_for('static', filename='images/hero.jpg') }}" alt="Hero Image"style="width:100%">
+
+        </div> 
+        <div class="content">
+            <h1>Bienvennu a<br><span>TYPIFAST</span></h1>
+            <p class="par">Bienvenue sur notre plateforme d'amélioration de la vitesse de frappe ! 
+		 <br>Entraînez-vous avec nos exercices interactifs pour taper plus rapidement et avec plus de précision.
+                <br>Prêt à relever le défi ? Commencez dès maintenant !</p>
+
+                <button class="cn"><a href="{{ url_for('connexion') }}">Se Connecter</a></button>
+                <button class="cn1"><a href="{{ url_for('inscription') }}">S'inscrire</a></button>
+
+               
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+</div>
+</div>
+    </div>
+    </div>
+</div>
+</div>
+</body>
+{% include 'footer.html' %}
+</html>

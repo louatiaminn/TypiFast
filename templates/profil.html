@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - {{ platform_info.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur {{ platform_info.name }}</h1>
+        <p>{{ platform_info.description }}</p>
+    </header>
+    <main>
+        <section>
+            <h2>Votre Profil</h2>
+            <p>Nom d'utilisateur : {{ current_user }}</p>
+            <!-- Vous pouvez ajouter d'autres informations de profil ici -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 {{ platform_info.name }}</p>
+    </footer>
+</body>
+</html>

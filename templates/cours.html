@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cours</title>
+</head>
+<body>
+    <h1>Cours</h1>
+    
+    {% for niveau, cours in cours_par_niveau.items() %}
+        <h2>{{ niveau }}</h2>
+        <ul>
+            {% for cours_item in cours %}
+                <li>{{ cours_item }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>
+</html>
