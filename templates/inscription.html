@@ -9,38 +9,40 @@
 <body>
 
     <div class="main"> 
-        <img src="{{ url_for('static', filename='images/login.jpeg') }}" alt="login Image" style="	opacity:calc(1/ (28/12)); width:100%;height:98%;">
-    
-            </div> 
-        
-        <div class="formin">
-            <div class="container">
-
-                <label for="uname"><b>  <i class="fas fa-user"></i>&nbsp;&nbsp;Nom</b></label>
+        <img src="{{ url_for('static', filename='images/login.jpeg') }}" alt="login Image" style="opacity: calc(1/ (28/12)); width: 100%; height: 100%;">
+    </div> 
+       
+    <div class="formin">
+        <div class="container">
+            <form method="POST" action="{{ url_for('register') }}">
+                <label for="pseudo"><b><i class="fas fa-user"></i>&nbsp;&nbsp;Pseudo</b></label>
                 <div class="input-icon">
-                    <input type="text" placeholder="Entrez votre nom " name="uname" required>
+                    <input type="text" placeholder="Entrez votre pseudo" name="pseudo" id="pseudo" autocomplete="on" required>
                 </div>
-                <label for="Prénom"><b>  <i class="fas fa-user"></i>&nbsp;&nbsp;Prénom</b></label>
+                <label for="username"><b><i class="fas fa-user"></i>&nbsp;&nbsp;Nom</b></label>
                 <div class="input-icon">
-                    <input type="text" placeholder="Entrez votre Prénom " name="Prénom" required>
+                    <input type="text" placeholder="Entrez votre nom" name="nom" id="nom" autocomplete="on" required>
                 </div>
-                <label for="uname"><b>  <i class="fas fa-envelope"></i>&nbsp;&nbsp;Email</b></label>
+                <label for="prenom"><b><i class="fas fa-user"></i>&nbsp;&nbsp;Prénom</b></label>
                 <div class="input-icon">
-                    <input type="text" placeholder="Entrez votre E-mail " name="uname" required>
+                    <input type="text" placeholder="Entrez votre Prénom" name="prenom" id="prenom" autocomplete="on" required>
                 </div>
-                <label for="uname"><b>  <i class="fas fa-lock"></i>&nbsp;&nbsp;Password</b></label>
+                <label for="email"><b><i class="fas fa-envelope"></i>&nbsp;&nbsp;Email</b></label>
                 <div class="input-icon">
-                    <input type="text" placeholder="Entrez Mot de passe " name="uname" required>
+                    <input type="text" placeholder="Entrez votre E-mail" name="email" id="email" autocomplete="on" required>
                 </div>
-
-            <button type="submit"><a href="#">S'inscrire</a></button>
+                <label for="password"><b><i class="fas fa-lock"></i>&nbsp;&nbsp;Mot de passe</b></label>
+                <div class="input-icon">
+                    <input type="password" placeholder="Entrez Mot de passe" name="password" id="password" autocomplete="new-password" required>
+                </div>
+                <button type="submit">S'inscrire</button>
+            </form>
+            
             <p class="link">Vous avez déjà un compte ?<br>
             <a href="{{ url_for('connexion') }}">Connectez-vous ici</a></p>
         </div>
     </div>
-</div>
-    {% include 'footer.html'   %}
-        </div>
-        
+
+    {% include 'footer.html' %}
 </body>
 </html>

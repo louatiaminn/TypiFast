@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#typing-area {
+    width: 50%;
+    height: 200px;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+}
+
+#start-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#start-button:hover {
+    background-color: #3e8e41;
+}
+
+#timer {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+#result {
+    font-size: 18px;
+    margin-top: 20px;
+}

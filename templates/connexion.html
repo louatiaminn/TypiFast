@@ -8,53 +8,43 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <body>
-    
     <div class="mainlog"> 
-        <img src="{{ url_for('static', filename='images/login.jpeg') }}" alt="login Image" style="	opacity:calc(1/ (28/12)); width:100%;height:712px;">
+        <img src="{{ url_for('static', filename='images/login.jpeg') }}" alt="login Image" style="opacity:calc(1/ (25/12)); width:100%;height:100%;">
+    </div> 
     
-            </div> 
-    
-            <div class="form">
-                <div class="container">
-                    <label for="uname"><b>  <i class="fas fa-user"></i>&nbsp;&nbsp;Nom d'utilisateur</b></label>
-                    <div class="input-icon">
-                      
-
-                        <input type="text" placeholder="Entrez le nom d'utilisateur" name="uname" required>
-                    </div>
-                    <div class="input-icon">
-
-                    <label for="psw"> <i class="fas fa-lock"></i> <b>&nbsp;&nbsp;Mot de passe</b></label>
-                       <input type="password" placeholder="Entrez le mot de passe" name="psw" required>
-                    </div>
-                    <br>
-                    <br>
-                    
-                    <button type="submit"><i class="fas fa-sign-in-alt"></i> Connexion</button>
-                    
-                    <label>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <a href="{{ url_for('inscription') }}"><i class="fas fa-user-plus"></i> Inscrivez-vous?</a>
-                    </label>
+    <div class="form">
+        <form action="{{ url_for('connexion') }}" method="post">
+            <div class="container">
+                <label for="pseudo"><b> <i class="fas fa-user"></i>&nbsp;&nbsp;Nom d'utilisateur</b></label>
+                <div class="input-icon">
+                    <input type="text" placeholder="Entrez le nom d'utilisateur" name="pseudo" required>
                 </div>
-            
-                <div class="container" style="background-color:#">
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <span class="pswo"><i class="fas fa-question"></i> Mot de passe oublié? <a href="#">password?</a></span>
+                <div class="input-icon">
+                    <label for="password"> <i class="fas fa-lock"></i> &nbsp;&nbsp;Mot de passe</label>
+                    <input type="password" placeholder="Entrez le mot de passe" name="password" required>
                 </div>
+                <br>
+                <br>
+                <button type="submit"><i class="fas fa-sign-in-alt"></i> Connexion</button>
+                <label>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <a href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i> Inscrivez-vous?</a>
+                </label>
             </div>
-</form>            
+        </form>
+        <div class="container" style="background-color:#">
+            <br>
+            <br>
+            <br>
+            <br>
+            <span class="pswo"><i class="fas fa-question"></i> Mot de passe oublié? <a href="{{ url_for('forgetpass')}}">password?</a></span>
         </div>
     </div>
-</div>
-</div>
-        {%include"footer.html"%}
 </body>
+{%include"footer.html"%}
+
 </html>

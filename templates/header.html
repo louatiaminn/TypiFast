@@ -1,18 +1,58 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    .cn {
+        text-align: center;
+        width: 160px;
+        height: 40px;
+        background: #70ABAF;
+        border: none;
+        margin-bottom: 10px;
+        margin-left: 4%;
+        font-size: 18px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: .4s ease;
+    }
+    
+    
+    .cn a {
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        transition: .3s ease;
+    }
+    
+     .cn:hover{
+        background-color: #E8DFCA;
+    }
+    
+    .cn1:hover{
+        background-color: #E8DFCA;
+    }
+</style>
 <div class="main"><div>
     <div class="navbar">
         <div class="icon">
             <img src="{{ url_for('static', filename='images/clavier.png') }}" alt="Hero Image" class="logoimg">
 
-            <h2 class="logo">TYPIFAST</h2>
+            <h2 class="logo"><a href="{{ url_for('index') }}">TYPIFAST</a></h2>
         </div>
 
         <div class="menu">
             <ul>
-                <li class="fas fa-home" style="color:#AEBDCA"><a href="{{ url_for('accueil') }}">&nbsp;ACCUEIL</a></li>
+                {% if logged_in %}
+                <li class="fas fa-home" style="color:#AEBDCA"><a href="{{ url_for('index') }}">&nbsp;ACCUEIL</a></li>
+                <li class="fas fa-book" style="color:#AEBDCA"><a href="{{ url_for('typing_course') }}">&nbsp;COURS</a></li>
+                <li class="fas fa-address-book" style="color:#AEBDCA"><a href="{{ url_for('contact') }}"">&nbsp;CONTACT</a></li>
+                <li class="fas fa-envelope" style="color:#AEBDCA"><a href="{{ url_for('view_responses') }}"">&nbsp;MESSAGES</a></li>
+                <button class="cn"><a href="{{ url_for('logout') }}">Déconnecter</a></button>
+            {% else %}
+            <li class="fas fa-home" style="color:#AEBDCA"><a href="{{ url_for('index') }}">&nbsp;ACCUEIL</a></li>
                 <li class="fas fa-flask" style="color:#AEBDCA"><a href="{{ url_for('test_vitesse_clavier') }}">&nbsp;TEST</a></li>
-                <li class="fas fa-book" style="color:#AEBDCA"><a href="#">&nbsp;COURS</a></li>
-                <li class="fas fa-address-book" style="color:#AEBDCA"><a href="#">&nbsp;CONTACT</a></li>
+                <button class="cn"><a href="{{ url_for('connexion') }}">Se Connecter</a></button>
+                <button class="cn"><a href="{{ url_for('register') }}">S'inscrire</a></button>
+            {% endif %}
+                       
             </ul>
         </div>
         

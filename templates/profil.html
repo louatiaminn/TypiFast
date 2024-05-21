@@ -3,23 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil - {{ platform_info.name }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            max-width: 800px; 
+            margin: 50px auto; 
+            padding: 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Profile Header */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Profile Details and Stats */
+        .profile-details, .profile-stats {
+            margin-bottom: 20px;
+        }
+
+        /* Profile Stats */
+        .profile-stats {
+            border-top: 2px solid #ccc;
+            padding-top: 20px;
+        }
+        .custom-link {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .custom-link:hover {
+            background-color: #0056b3;
+        .custom-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Bienvenue sur {{ platform_info.name }}</h1>
-        <p>{{ platform_info.description }}</p>
-    </header>
-    <main>
-        <section>
-            <h2>Votre Profil</h2>
-            <p>Nom d'utilisateur : {{ current_user }}</p>
-            <!-- Vous pouvez ajouter d'autres informations de profil ici -->
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 {{ platform_info.name }}</p>
-    </footer>
+    {% include 'header.html' %}
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Welcome, {{ session['pseudo'] }}!</h1>
+            <p>{{ session['nom'] }} {{ session['prenom'] }}</p>
+        </div>
+        <div class="profile-details">
+            <h2>Profile Details</h2>
+            <p><strong>Email:</strong> {{ session['email'] }}</p>
+        </div>
+        <div class="profile-actions">
+            <a href="{{ url_for('index') }}"class="custom-link">Retour</a>
+            <a href="{{ url_for('modifyprofile') }}"class="custom-link">Modifier Profile</a>
+        </div>
+        <div class="profile-stats">
+            <h2>Statistics</h2>
+            <p><strong>Current Level:</strong> 1</p>
+            <p><strong>Advancement Percentage:</strong> 1%</p>
+        </div>
+    </div>
+    {% include 'footer.html' %}
 </body>
 </html>

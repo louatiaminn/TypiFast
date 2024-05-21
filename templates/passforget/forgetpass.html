@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Récupération de mot de passe - TYPI FAST</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+{% include 'header.html' %}
+
+<body>
+    <div class="main">
+        <img src="{{ url_for('static', filename='images/login.jpeg') }}" alt="Image de récupération de mot de passe" style="opacity: calc(1 / (28 / 12)); width: 100%; height: 100%;">
+    </div>
+
+    <div class="form">
+        <div class="container">
+            <form method="POST" action="{{ url_for('forgetpass') }}">
+                <div class="container">
+                    <label for="pseudo"><b> <i class="fas fa-user"></i>&nbsp;&nbsp;Email</b></label>
+                    <div class="input-icon">
+                        <input type="text" placeholder="Entrez Votre Email" name="pseudo" required>
+                    </div>
+                <button type="submit"><i class="fas fa-envelope"></i> Envoyer le lien de récupération</button>
+            </form>
+        </div>
+    </div>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

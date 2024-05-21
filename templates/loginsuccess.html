@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Login Success</title>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .containerls {
+            display: flex;
+            max-width: 1200px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 50px auto;
+        }
+        .sidebar {
+            flex: 0 0 300px;
+            background-color: #7d8d92;
+            background-image: url("{{ url_for('static', filename='images/images.jpeg') }}");
+            background-size: cover;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .sidebar:hover {
+            transform: translateX(0);
+        }
+        .dashboard {
+            flex: 1;
+            padding: 20px;
+        }
+        .welcome-message {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-top: 30px;
+        }
+        .section h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .section p {
+            font-size: 1em;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #7d8d92;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #666;
+        }
+        .icon {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+{% include 'header.html' %}
+<body>
+    <div class="containerls">
+        <div class="dashboard">
+            <p class="welcome-message">Content de vous voir ici ! Ensemble, nous allons découvrir tous les secrets de la frappe au clavier. Commençons à apprendre !</p>
+            
+            <div class="course-info">
+                <a href="{{ url_for('index') }}" class="button">Commencer le cours</a>
+            </div>
+            
+            <hr>
+           
+            <div class="certificate">
+                <h2> <img src="{{ url_for('static', filename='images/test.png') }}"style='width:30px;height:17px ;'>Jeu de Dactylographie</h2>
+                <p>Prenez une jeu de frappe en ligne pour connaître votre vitesse de frappe et impressionner vos amis ou employeurs avec votre niveau de vitesse de frappe.</p>
+                <br>
+                <a href="{{ url_for('testvit') }}" class="button">Commencer le jeu</a>
+            </div>
+            
+            <hr>
+            
+            <div class="learn-typing">
+                <h2> <img src="{{ url_for('static', filename='images/keyboard.png') }}"style='width:30px;height:17px ;'">Apprenez la frappe au clavier</h2>
+                <p>Accélérez votre progression d'apprentissage avec le tuteur de frappe Ratatype et développez des compétences précieuses en frappe au clavier !</p>
+                <br>
+                <a href="{{ url_for('info') }}" class="button">Voir les astuces!</a>
+            </div>
+        </div>
+        <div class="sidebar">
+            <h1>Salut, {{ session['pseudo'] }}!</h1> 
+            <p class="welcome-message">vous pouvez modifier votre profil ici</p>
+            <div class="course-info">
+                <br>
+                <a href="{{ url_for('modifyprofile') }}" class="button">Modifier profil</a>
+            </div>
+        </div>
+    </div>
+</body>
+{% include 'footer.html' %}
+</html>

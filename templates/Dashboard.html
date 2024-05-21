@@ -1,137 +1,381 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
-  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - TypiFast</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            background-color: #343a40;
+            color: #fff;
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+            transition: all 0.3s;
+        }
+        .sidebar .sidebar-header {
+            text-align: center;
+            padding: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+            border-bottom: 1px solid #495057;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 10px 20px;
+            border-bottom: 1px solid #495057;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #495057;
+            text-decoration: none;
+        }
+        .sidebar a.active {
+            background-color: #007bff;
+        }
+        .sidebar a .fa {
+            margin-right: 10px;
+        }
+        .container {
+            margin-left: 270px;
+            padding: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card-header {
+            font-size: 1.25em;
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 15px;
+        }
+        .card-content {
+            color: #495057;
+        }
+        .form-group {
+            margin-bottom: 1.5em;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .table-mailbox {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+        .table-mailbox th,
+        .table-mailbox td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+        .table-mailbox thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+        .table-mailbox tbody + tbody {
+            border-top: 2px solid #dee2e6;
+        }
+        .actions-buttons {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
 </head>
-
 <body>
-  <!<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-    data-sidebar-position="fixed" data-header-position="fixed">
-    <!-- Sidebar Start -->
-    <aside class="left-sidebar">
-      <!-- Sidebar scroll-->
-      <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          </a>
-          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-            <i class="ti ti-x fs-8"></i>
-          </div>
+    <div class="sidebar">
+        <div class="sidebar-header">Admin Dashboard</div>
+        <ul>
+            <li><a href="#user-list"><i class="fa fa-users"></i> Voir la liste des utilisateurs</a></li>
+            <li><a href="#add-admin"><i class="fa fa-user-plus"></i> Ajouter des administrateurs</a></li>
+            <li><a href="#platform-stats"><i class="fa fa-chart-line"></i> Voir les statistiques de la plateforme</a></li>
+            <li><a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Deconnecter</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div id="platform-stats" class="card">
+            <div class="card-header">Voir les statistiques de la plateforme</div>
+            <div class="card-content">
+                <p>Nombre total d'utilisateurs: <strong id="total-users">Loading...</strong></p>
+            </div>
         </div>
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-          <ul id="sidebarnav">
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">Home</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-                <span class="hide-menu">Dashboard</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-article"></i>
-                </span>
-                <span class="hide-menu">Buttons</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-alert-circle"></i>
-                </span>
-                <span class="hide-menu">Alerts</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-cards"></i>
-                </span>
-                <span class="hide-menu">Card</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">Forms</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-typography"></i>
-                </span>
-                <span class="hide-menu">Typography</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">AUTH</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-login"></i>
-                </span>
-                <span class="hide-menu">Login</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user-plus"></i>
-                </span>
-                <span class="hide-menu">Register</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">EXTRA</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-mood-happy"></i>
-                </span>
-                <span class="hide-menu">Icons</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              
-            </li>
-          </ul>
-          <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
-            <div class="d-flex">
-              <div class="unlimited-access-title me-3">
-              </div>
-              
-          
-        </nav>
-        <!-- End Sidebar navigation -->
-      </div>
-      <!-- End Sidebar scroll-->
-    </aside>
-    <!--  Sidebar End -->
-    <!--  Main wrapper -->
-    <div class="body-wrapper">--  Body Wrapper -->
-  
-      <!--  Header Start -->
-                      
-      <!--  Header End -->
-    </body>
-    </html>
+
+        <div id="user-list" class="card">
+            <div class="card-header">Liste des utilisateurs</div>
+            <div class="card-content">
+                <ul id="user-list-container"></ul>
+            </div>
+        </div>
+
+        <div id="manage-user" class="card">
+            <div class="card-header">Gérer les utilisateurs</div>
+            <div class="card-content">
+                <form id="manage-user-form">
+                    <div class="form-group">
+                        <label for="user-email">Email de l'utilisateur</label>
+                        <input type="email" class="form-control" id="user-email" placeholder="Entrer l'email de l'utilisateur" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-action">Action</label>
+                        <select class="form-control" id="user-action">
+                            <option value="create">Créer</option>
+                            <option value="update">Mettre à jour</option>
+                            <option value="delete">Supprimer</option>
+                        </select>
+                    </div>
+                    <div id="user-details" style="display: none;">
+                        <div class="form-group">
+                            <label for="user-name">Nom</label>
+                            <input type="text" class="form-control" id="user-name" placeholder="Entrer le nom de l'utilisateur">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-surname">Prénom</label>
+                            <input type="text" class="form-control" id="user-surname" placeholder="Entrer le prénom de l'utilisateur">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-password">Mot de passe</label>
+                            <input type="password" class="form-control" id="user-password" placeholder="Entrer le mot de passe de l'utilisateur">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Exécuter</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="add-admin" class="card">
+            <div class="card-header">Ajouter des administrateurs</div>
+            <div class="card-content">
+                <form id="add-admin-form">
+                    <div class="form-group">
+                        <label for="admin-email">Email de l'administrateur</label>
+                        <input type="email" class="form-control" id="admin-email" placeholder="Entrer l'email de l'administrateur" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password">Mot de passe</label>
+                        <input type="password" class="form-control" id="admin-password" placeholder="Entrer le mot de passe de l'administrateur" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="mailer" class="card">
+            <div class="card-header">Boîte de réception</div>
+            <div class="card-content">
+                <table class="table table-mailbox">
+                    <thead>
+                        <tr>
+                            <th>Expéditeur</th>
+                            <th>Sujet</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mail-list">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="reply-form" class="card" style="display:none;">
+            <div class="card-header">Répondre au message</div>
+            <div class="card-content">
+                <form id="reply-form-inner">
+                    <div class="form-group">
+                        <label for="reply-to">À</label>
+                        <input type="text" class="form-control" id="reply-to" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="reply-subject">Sujet</label>
+                        <input type="text" class="form-control" id="reply-subject" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="reply-message">Votre réponse</label>
+                        <textarea class="form-control" id="reply-message" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('add-admin-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var adminEmail = document.getElementById('admin-email').value;
+            var adminPassword = document.getElementById('admin-password').value;
+            fetch('/add-admin', {
+                method: 'POST',
+                body: JSON.stringify({ 'admin-email': adminEmail, 'admin-password': adminPassword }),
+                headers: { 'Content-Type': 'application/json' }
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.message) {
+                      alert('Admin added successfully');
+                  } else {
+                      alert('Failed to add admin: ' + data.error);
+                  }
+              }).catch(error => {
+                  console.error('Error:', error);
+              });
+        });
+
+        document.getElementById('manage-user-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var userEmail = document.getElementById('user-email').value;
+            var userAction = document.getElementById('user-action').value;
+            var userName = document.getElementById('user-name').value;
+            var userSurname = document.getElementById('user-surname').value;
+            var userPassword = document.getElementById('user-password').value;
+
+            var payload = {
+                'user-email': userEmail,
+                'user-action': userAction
+            };
+
+            if (userAction !== 'delete') {
+                payload['user-name'] = userName;
+                payload['user-surname'] = userSurname;
+                payload['user-password'] = userPassword;
+            }
+
+            fetch('/manage-user', {
+                method: 'POST',
+                body: JSON.stringify(payload),
+                headers: { 'Content-Type': 'application/json' }
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.message) {
+                      alert('User management action completed successfully');
+                      fetchUsers();
+                  } else {
+                      alert('Failed to complete user management action: ' + data.error);
+                  }
+              }).catch(error => {
+                  console.error('Error:', error);
+              });
+        });
+
+        document.getElementById('user-action').addEventListener('change', function(event) {
+            var userAction = event.target.value;
+            var userDetails = document.getElementById('user-details');
+            if (userAction === 'create' || userAction === 'update') {
+                userDetails.style.display = 'block';
+            } else {
+                userDetails.style.display = 'none';
+            }
+        });
+
+        function fetchUsers() {
+            fetch('/get-users')
+                .then(response => response.json())
+                .then(data => {
+                    var userListContainer = document.getElementById('user-list-container');
+                    userListContainer.innerHTML = '';
+                    data.users.forEach(user => {
+                        var listItem = document.createElement('li');
+                        listItem.textContent = user.nom + ' ' + user.prenom;
+                        userListContainer.appendChild(listItem);
+                    });
+                }).catch(error => {
+                    console.error('Error fetching user data:', error);
+                });
+        }
+
+        function fetchPlatformStats() {
+            fetch('/get-platform-stats')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('total-users').textContent = data.total_users;
+                }).catch(error => {
+                    console.error('Error fetching platform stats:', error);
+                });
+        }
+
+        function fetchMessages() {
+            fetch('/get-messages')
+                .then(response => response.json())
+                .then(data => {
+                    var mailList = document.getElementById('mail-list');
+                    mailList.innerHTML = '';
+                    data.messages.forEach(message => {
+                        var row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${message.email}</td>
+                            <td>${message.subject}</td>
+                            <td>${message.created_at}</td>
+                            <td class="actions-buttons">
+                                <button class="btn btn-sm btn-primary" onclick="showReplyForm('${message.email}', '${message.subject}')">Répondre</button>
+                                <button class="btn btn-sm btn-danger">Supprimer</button>
+                            </td>
+                        `;
+                        mailList.appendChild(row);
+                    });
+                }).catch(error => {
+                    console.error('Error fetching messages:', error);
+                });
+        }
+
+        function showReplyForm(email, subject) {
+            document.getElementById('reply-to').value = email;
+            document.getElementById('reply-subject').value = subject;
+            document.getElementById('reply-form').style.display = 'block';
+        }
+
+        document.getElementById('reply-form-inner').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var replyTo = document.getElementById('reply-to').value;
+            var replySubject = document.getElementById('reply-subject').value;
+            var replyMessage = document.getElementById('reply-message').value;
+            fetch('/save-response', {
+                method: 'POST',
+                body: JSON.stringify({
+                    'email': replyTo,
+                    'subject': replySubject,
+                    'response': replyMessage
+                }),
+                headers: { 'Content-Type': 'application/json' }
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.message) {
+                      alert('Response saved successfully');
+                      document.getElementById('reply-form').style.display = 'none';
+                  } else {
+                      alert('Failed to save response: ' + data.error);
+                  }
+              }).catch(error => {
+                  console.error('Error:', error);
+              });
+        });
+
+        window.onload = function() {
+            fetchUsers();
+            fetchPlatformStats();
+            fetchMessages();
+        };
+    </script>
+</body>
+</html>

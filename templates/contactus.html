@@ -1,57 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    {% include 'header.html' %}
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contactez-nous</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        form {
-            width: 50%;
-            margin: auto;
-        }
-        label, input, textarea {
-            display: block;
-            margin-bottom: 10px;
-        }
-        input[type="submit"] {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
+
+
+*, 
+*:before, 
+*:after {
+   @include box-sizing(border-box); 
+}
+
+
+
+h1 {
+    margin-top:130px;
+   text-align: center;
+   color: #a8a8a8;
+   @include text-shadow(1px 1px 0 rgba(white, 1));
+}
+
+form {
+  padding-bottom: 100px;
+
+   max-width: 800px;
+   text-align: center;
+   margin: 20px auto;
+  
+  input, textarea {
+     border:0; outline:0;
+     padding: 1em;
+     @include border-radius(8px);
+     display: block;
+     width: 100%;
+     margin-top: 1em;
+     font-family: 'Merriweather', sans-serif;
+     @include box-shadow(0 1px 1px rgba(black, 0.1));
+     resize: none;
+    
+    &:focus {
+       @include box-shadow(0 0px 2px rgba($red, 1)!important);
+    }
+  }
+  
+  #input-submit {
+     color: white; 
+     background: #17A2B8;
+     cursor: pointer;
+    
+    &:hover {
+       @include box-shadow(0 1px 1px 1px rgba(#17A2B8, 0.6)); 
+    }
+  }
+  
+  textarea {
+      height: 126px;
+  }
+}
+
+
+.half {
+  float: left;
+  width: 48%;
+  margin-bottom: 1em;
+}
+
+.right { width: 50%; }
+
+.left {
+     margin-right: 2%; 
+}
+
+
+@media (max-width: 480px) {
+  .half {
+     width: 100%; 
+     float: none;
+     margin-bottom: 0; 
+  }
+}
+
+
+.cf:before,
+.cf:after {
+    content: " "; 
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Contactez-nous</h1>
-        <form action="#" method="POST">
-            <label for="nom">Nom :</label>
-            <input type="text" id="nom" name="nom" required>
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Message :</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-            <input type="submit" value="Envoyer">
+    <div>
+        <h1>Contact</h1>
+        <form class="cf" id="contact-form">
+            <div class="half left cf">
+                <input type="text" id="input-name" placeholder="Nom">
+                <input type="email" id="input-email" placeholder="address Email">
+                <input type="text" id="input-subject" placeholder="Sujet">
+            </div>
+            <div class="half right cf">
+                <textarea name="message" type="text" id="input-message" placeholder="Message"></textarea>
+            </div>
+            <input type="submit" value="Submit" id="input-submit">
         </form>
     </div>
+    <script src="{{ url_for('static', filename='js/contactus.js') }}"></script>
+    {% include 'footer.html' %}
 </body>
 </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Typing cours</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/typing_cours.css') }}">
+    {% include 'header.html' %}
+</head>
+<body>
+    <div class="wrapper">
+        <input type="text" class="input-field">
+        <div class="content-box">
+            <h1 style="color: #333;">cours</h1>
+            <div class="content">
+                <ul class="result-details">
+                    <li class="time">
+                        <p style="color: #333;">Temps:</p>
+                        <span><b>60</b>s</span>
+                    </li>
+                    <li class="mistake">
+                        <p style="color: #333;">Fautes:</p>
+                        <span>0</span>
+                    </li>
+                    <li class="wpm">
+                        <p style="color: #333;">WPM:</p>
+                        <span>0</span>
+                    </li>
+                    <li class="cpm">
+                        <p style="color: #333;">CPM:</p>
+                        <span>0</span>
+                    </li>
+                </ul>
+                <button class="continue" style="background: #4CAF50;">Continue</button>
+            </div>
+            <div class="typing-text">
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/typing_cours.js') }}"></script>
+</body>
+{% include 'footer.html' %}
+</html>

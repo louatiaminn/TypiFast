@@ -16,7 +16,6 @@ const baliseErreur = document.getElementById("nbErreurs");
 const baliseMPM = document.getElementById("mpm");
 const baliseCPM = document.getElementById("cpm");
 
-// Variables pour la minuterie et les compteurs
 let minuterie;
 let tempsMax = 60;
 let tempsRestant = tempsMax;

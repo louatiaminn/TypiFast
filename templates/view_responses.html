@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voir les réponses de l'admin</title>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <style>
+        /* responses.css */
+        .containerresp {
+            max-width: 800px;
+            margin: 200px auto;
+            padding: 5%;
+            padding-bottom: 400px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        thead {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+{% include "header.html" %}
+<body>
+    <div class="containerresp mt-5">
+        <h2>Réponses de l'admin</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>email</th>
+                    <th>subject</th>
+                    <th>response</th>
+                    <th>created_at</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>amine@gmail.com</td>
+                    <td>probleme de connexion</td>
+                    <td>merci de m'informez ou exactement le problem</td>
+                    <td>2024-05-19 13:58:41</td>
+                </tr>
+                <!-- Placeholder for other responses -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+{% include "footer.html" %}

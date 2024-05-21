@@ -1,222 +1,48 @@
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+/* CSS amélioré */
+.app-content {
+   margin: 40px 20px 20px 20px;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   grid-gap: 30px;
 }
 
-.mainl {
-    width: 100%;
-	display: block; 
-    height: 570px;
+.content-box {
+   border: 1px solid #ccc;
+   border-radius: 10px;
+   padding: 20px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   transition: transform 0.3s;
 }
 
-.header h1 {
-	margin: 0;
-	font-size: 1em;
-    text-align: center;
-    font-family: 'Segoe  UI', Tahoma, Geneva, Verdana, sans-serif;
-	color: #fff;
-  }
-  
-  /* Barre de navigation */
-  
-  .navbar {
-	background-color: #F0F7F4;
-	max-height: 65%;
-  }
-  
-  .navbar ul {
-	margin: 0;
-	margin-top: -55px;
-	padding: 0;
-	text-align: center;
-  }
-  
-  .navbar a {
-	color: #99E1D9;
-	text-decoration: none;
-	padding: 10px 20px;
-	transition: background-color 0.3s ease;
-  }
-  
-  .navbar a:hover {
-	color: #fff;
-	border-radius: 100px;
-  }
-  
-
-.icon {
-	width: 200px;
-	height: 70px;
+.content-box:hover {
+   transform: translateY(-10px);
 }
 
-.logoimg{
-    display : inline-block;
-    padding-top: 2%;
-    margin-left : 16% ;
-    width:20%;
+.content-box-title {
+   font-size: 1.5em;
+   margin-bottom: 15px;
+   color: #007B8A;
+   text-align: center;
 }
 
-.logo {
-    display : inline-block;
-	color: #70ABAF; 
-	font-size: 30px;
-	font-family: Arial;
-	padding-left: 80px;
-	float: left;
-	padding-top: -10px;
-	margin-top: -35px;
+.content-box-body {
+   line-height: 1.8;
+   color: #333;
 }
 
-
-.search {
-	width: 230px;
-	margin-left: auto;
+/* Typographie et couleurs */
+body {
+   font-family: 'Arial', sans-serif;
+   color: #444;
+   background-color: #f9f9f9;
+   margin: 0;
+   padding: 0;
 }
 
-
-.btn {
-	width: 100px;
-	height: 40px;
-	background: #e6e6fa; 
-	border: 2px solid #e6e6fa; 
-	margin-top: 13px;
-	color: #000; 
-	font-size: 15px;
-	border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
-	transition: 0.2s ease;
-	cursor: pointer;
+h2 {
+   font-family: 'Helvetica', sans-serif;
 }
 
-.btn:hover {
-	color: #fff; 
+strong {
+   color: #007B8A;
 }
-
-.btn:focus {
-	outline: none;
-}
-
-.footer { width:100%;
-    background-color:#32292F;
-     min-height:250px;
-      padding:10px 0px 25px 0px ;
-   }
-      
-.pt2 { 
-   padding-top:40px ;
-    margin-bottom:20px ;
-   }
-footer p {
-    font-size:13px; 
-    color:#CCC;
-    padding-bottom:0px;
-     margin-bottom:8px;
-   }
-.mb10 {
-    padding-bottom:15px ;
-   }
-.footer_ul_amrc {
-    margin:0px ;
-     list-style-type:none ;
-     font-size:14px;
-     padding:0px 0px 10px 0px ; 
-   }
-.footer_ul_amrc li {
-   padding:0px 0px 5px 0px;
-}
-.footer_ul_amrc li a{
-    color:#CCC;
-   }
-.footer_ul_amrc li a:hover{
-    color:#fff;
-    text-decoration:none;
-   }
-
-.padding-right {
-    padding-right:10px; 
-   }
-
-.footer_ul2_amrc {margin:0px;
-   list-style-type:none;
-    padding:0px;
-   }
-.footer_ul2_amrc li p {
-    display:table; 
-   }
-.footer_ul2_amrc li a:hover {
-    text-decoration:none;
-   }
-.footer_ul2_amrc li i {
-    margin-top:5px;
-   }
-
-.bottom_border { 
-   border-bottom:1px solid #333;
-    padding-bottom:20px;}
-.foote_bottom_ul_amrc {
-   list-style-type:none;
-   padding:0px;
-   display:table;
-   margin-top: 10px;
-   margin-right: auto;
-   margin-bottom: 10px;
-   margin-left: auto;
-}
-.foote_bottom_ul_amrc li { 
-   display:inline;
-}
-.foote_bottom_ul_amrc li a {
-    color:#999; margin:0 12px;
-   }
-
-.social_footer_ul {
-    display:table;
-     margin:15px auto 0 auto;
-      list-style-type:none;
-     }
-.social_footer_ul li { padding-left:20px; padding-top:10px; float:left; }
-.social_footer_ul li a { color:#CCC; border:1px solid #CCC; padding:8px;border-radius:50%;}
-.social_footer_ul li i {  width:20px; height:20px; text-align:center;}
-
-
-/* Styles existants pour le header, le footer et .mainl */
-
-.conteneur {
-    width: 90%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
- }
- 
- .champ-saisie {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    resize: none;
- }
- 
- .zone-contenu {
-    text-align: center;
- }
- 
- .zone-contenu button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #70ABAF;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
- }
- 
- .zone-contenu button:hover {
-    background-color: #5D87FF;
- }
- 
