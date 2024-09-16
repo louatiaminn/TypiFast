@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voir les réponses de l'admin</title>
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
-        /* responses.css */
         .containerresp {
             max-width: 800px;
             margin: 200px auto;
@@ -52,7 +51,6 @@
         }
     </style>
 </head>
-{% include "header.html" %}
 <body>
     <div class="containerresp mt-5">
         <h2>Réponses de l'admin</h2>
@@ -67,17 +65,17 @@
                 </tr>
             </thead>
             <tbody>
+                {% for response in responses %}
                 <tr>
-                    <td>1</td>
-                    <td>amine@gmail.com</td>
-                    <td>probleme de connexion</td>
-                    <td>merci de m'informez ou exactement le problem</td>
-                    <td>2024-05-19 13:58:41</td>
+                    <td>{{ response[0] }}</td>
+                    <td>{{ response[1] }}</td>
+                    <td>{{ response[2] }}</td>
+                    <td>{{ response[3] }}</td>
+                    <td>{{ response[4] }}</td>
                 </tr>
-                <!-- Placeholder for other responses -->
+                {% endfor %}
             </tbody>
         </table>
     </div>
 </body>
 </html>
-{% include "footer.html" %}

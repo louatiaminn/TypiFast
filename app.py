@@ -1,4 +1,4 @@
-from flask import Flask, flash, jsonify, render_template, request, redirect, url_for, session
+from flask import Flask, flash, json, jsonify, render_template, request, redirect, url_for, session
 import mysql.connector
 from flask_bcrypt import Bcrypt
 import smtplib
@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import secrets
+import requests
 
 
 connection = mysql.connector.connect(host='localhost',port='3306',database='typifast',user='root',password='')
@@ -34,6 +35,55 @@ def index():
         return render_template('index.html', logged_in=False)
    
    
+   
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        nom = request.form['nom']
+        prenom = request.form['prenom']
+        pseudo = request.form['pseudo']
+        email = request.form['email']
+        password = request.form['password']
+        
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+        
+        Cursor.execute("SELECT * FROM users WHERE pseudo = %s", (pseudo,))
+        existing_user = Cursor.fetchone()
+        if existing_user:
+            return "Pseudo already exists! Please choose a different one."
+        else:
+            Cursor.execute("INSERT INTO users (nom, prenom, pseudo, email, password) VALUES (%s, %s, %s, %s, %s)", (nom, prenom, pseudo, email, hashed_password))
+            connection.commit()
+            return redirect(url_for('connexion'))
+    return render_template('inscription.html', logged_in=False)
+
+@app.route('/connexion', methods=['GET', 'POST'])
+def connexion():
+    if request.method == 'POST':
+        pseudo = request.form['pseudo']
+        password = request.form['password']
+        if pseudo == ADMIN_EMAIL and bcrypt.check_password_hash(bcrypt.generate_password_hash(ADMIN_PASSWORD), password):
+            session['pseudo'] = pseudo
+            session['admin'] = True
+            flash('You have been logged in as admin.', 'success')
+            return redirect(url_for('admin_dashboard'))
+        else:
+            Cursor.execute("SELECT * FROM users WHERE pseudo = %s", (pseudo,))
+            user = Cursor.fetchone()
+            if user:
+                hashed_password = user[5] 
+                if bcrypt.check_password_hash(hashed_password, password):
+                    session['pseudo'] = pseudo
+                    flash('You have been successfully logged in.', 'success')
+                    return redirect(url_for('index')) 
+                else:
+                    flash('Invalid password! Please try again.', 'error')
+            else:
+                flash('User does not exist! Please register.', 'error')
+
+    return render_template('connexion.html', logged_in=False)
+
    
 @app.route('/forgetpass', methods=['GET', 'POST'])
 def forgetpass():
@@ -149,53 +199,48 @@ def save_game_data():
         return jsonify({"error": "User not authenticated"}), 401
 
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        nom = request.form['nom']
-        prenom = request.form['prenom']
-        pseudo = request.form['pseudo']
-        email = request.form['email']
-        password = request.form['password']
-        
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-        
-        Cursor.execute("SELECT * FROM users WHERE pseudo = %s", (pseudo,))
-        existing_user = Cursor.fetchone()
-        if existing_user:
-            return "Pseudo already exists! Please choose a different one."
-        else:
-            Cursor.execute("INSERT INTO users (nom, prenom, pseudo, email, password) VALUES (%s, %s, %s, %s, %s)", (nom, prenom, pseudo, email, hashed_password))
-            connection.commit()
-            return redirect(url_for('connexion'))
-    return render_template('inscription.html', logged_in=False)
 
-@app.route('/connexion', methods=['GET', 'POST'])
-def connexion():
-    if request.method == 'POST':
-        pseudo = request.form['pseudo']
-        password = request.form['password']
-        if pseudo == ADMIN_EMAIL and bcrypt.check_password_hash(bcrypt.generate_password_hash(ADMIN_PASSWORD), password):
-            session['pseudo'] = pseudo
-            session['admin'] = True
-            flash('You have been logged in as admin.', 'success')
-            return redirect(url_for('admin_dashboard'))
-        else:
-            Cursor.execute("SELECT * FROM users WHERE pseudo = %s", (pseudo,))
-            user = Cursor.fetchone()
-            if user:
-                hashed_password = user[5] 
-                if bcrypt.check_password_hash(hashed_password, password):
-                    session['pseudo'] = pseudo
-                    flash('You have been successfully logged in.', 'success')
-                    return redirect(url_for('index')) 
-                else:
-                    flash('Invalid password! Please try again.', 'error')
-            else:
-                flash('User does not exist! Please register.', 'error')
+def generateTestParagraphsWithGemini(stats):
+    
+    # Define the endpoint URL and your API key
+    url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent'
+    api_key = 'AIzaSyAvc4vbHIQZZDZoXTOZd8mOb6Zd2qeBvWQ'
 
-    return render_template('connexion.html', logged_in=False)
+    # Define the request body
+    body = {
+        "contents": [
+            {
+                "parts": [
+                    {
+                        "text": ("Following are results from a keyboard typing test: <test_results>weak letters: F,H,K; "
+                                "slow letters: O,P,X</test_results>. I want you to give me 2 randomly generated paragraphs "
+                                "containing, one that will be used to improve the slow letters and the other to improve weak "
+                                "letters. Your response must follow this json format: {'weak_letters_paragraph':'', "
+                                "'slow_letters_paragraph':''}")
+                    }
+                ]
+            }
+        ]
+    }
+
+    # Make the API call
+    response = requests.post(url, params={'key': api_key}, json=body)
+
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Parse the response JSON
+        data = response.json()
+        return json.dumps(data, indent=2)
+    else:
+        # Print the error if the request was not successful
+        print(f"Request failed with status code {response.status_code}")
+        print(response.text)
+
+
+
+
+
 
 @app.route('/dashboard')
 def admin_dashboard():
@@ -238,7 +283,7 @@ def view_responses():
     Cursor.execute("SELECT email FROM users WHERE pseudo = %s", (session['pseudo'],))
     user_email = Cursor.fetchone()[0]
     
-    Cursor.execute("SELECT subject, response, created_at FROM response WHERE email = %s ORDER BY created_at DESC", (user_email,))
+    Cursor.execute("SELECT id, email, subject, response, created_at FROM response WHERE email = %s ORDER BY created_at DESC", (user_email,))
     responses = Cursor.fetchall()
 
     return render_template('view_responses.html', responses=responses, logged_in=True)
@@ -482,4 +527,3 @@ def save_response():
 
 if __name__ == '__main__':
     app.run(debug=True)
-

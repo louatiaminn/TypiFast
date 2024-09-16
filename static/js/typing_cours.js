@@ -1,10 +1,10 @@
-const paragraphs = [
+let paragraphs = [
     "a aa aaa aaaa aaa aa a",
     "b bb bbb bbbb bbb bb b",
     "c cc ccc cccc ccc cc c",
     "d dd ddd dddd ddd dd d",
     "abcd bcad cbab bacd dabc cba dbda cbab caba bacca bad",
-    "abandonner baccalaureat cabaret dactylographie", 
+    "abandonner baccalaureat dactylographie", 
     "décapiter abcès cabine déboucher découvrir",
     "e ee eee eeee eee ee e",
     "f ff fff ffff fff ff f",
@@ -59,6 +59,8 @@ const paragraphs = [
     "analyse voyage joyeux crazy lazy",
 ];
 
+// paragraphs = [paragraphs[0]]
+
 const typingText = document.querySelector(".typing-text p"),
     inpField = document.querySelector(".input-field"),
     tryAgainBtn = document.querySelector(".try-again"),
@@ -68,11 +70,14 @@ const typingText = document.querySelector(".typing-text p"),
     wpmTag = document.querySelector(".wpm span"),
     cpmTag = document.querySelector(".cpm span");
 
+console.log(continueBtn)
+console.log("----------------")
+
 let timer,
     maxTime = 60,
     timeLeft = maxTime,
     charIndex = mistakes = isTyping = 0,
-    currentSentenceIndex = 0;
+    currentSentenceIndex = +localStorage.getItem("currentSentenceIndex") || 0
 
 function loadSentence() {
     typingText.innerHTML = "";
@@ -88,6 +93,7 @@ function loadSentence() {
 }
 
 function initTyping() {
+    idTest = Math.random(10000000)
     let characters = typingText.querySelectorAll("span");
     let typedChar = inpField.value.split("")[charIndex];
     if (charIndex < characters.length && timeLeft > 0) {
@@ -190,13 +196,18 @@ function resetTest() {
 }
 
 loadSentence();
-inpField.addEventListener("input", initTyping);
-tryAgainBtn.addEventListener("click", resetTest);
 continueBtn.addEventListener("click", () => {
     if (currentSentenceIndex < paragraphs.length - 1) {
         currentSentenceIndex++;
     } else {
-        currentSentenceIndex = 0;
+        window.location.href ="/test"
+        // currentSentenceIndex = 0;
     }
+
+    localStorage.setItem("currentSentenceIndex", currentSentenceIndex)
+    // post to  /save_course_progress and save progress
     resetTest();
 });
+inpField.addEventListener("input", initTyping);
+// tryAgainBtn.addEventListener("click", resetTest);
+
